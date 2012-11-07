@@ -2,6 +2,7 @@
 require 'coffee-script'
 optimist = require 'optimist'
 path = require 'path'
+fs = require 'fs'
 log = require './logger'
 
 # Let us find this in 'top'
@@ -35,7 +36,7 @@ middleware = []
 if process.argv.length > 2
   for fiddlePath in fiddlePaths
     testPath = fiddlePath + "/" + process.argv[2]
-    if path.existsSync(testPath + ".coffee") || path.existsSync(testPath + ".js")
+    if fs.existsSync(testPath + ".coffee") || fs.existsSync(testPath + ".js")
       activeFiddle = testPath
       break
   if activeFiddle == null

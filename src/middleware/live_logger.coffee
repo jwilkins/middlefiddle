@@ -1,4 +1,5 @@
 express = require('express')
+http = require('http')
 io = require('socket.io')
 ringBuffer = require('../utils/ringbuffer').create(100)
 log = require '../logger'
@@ -9,8 +10,12 @@ currentSocket = null
 impracticalMimeTypes = /^(image|audio|video)\//
 
 createServer = (callback) ->
-  app = express.createServer()
-  io = io.listen(app, {"log level": 0})
+  app = express();
+  # .createServer()
+  ex_svr = http.createServer(app)
+  #io = http.createServer(app).listen
+  #io = io.listen(app, {"log level": 0})
+  io = io.listen(ex_svr, {"log level": 0})
   app.configure ->
     app.use express.static(__dirname + '/live_logger/public')
 

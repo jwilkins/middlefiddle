@@ -1,11 +1,11 @@
 {
   "name": "middlefiddle",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Middleware as a proxy for HTTP/HTTPS traffic",
   "keywords": ["proxy", "middleware", "connect"],
-  "repository": "git://github.com/mdp/middlefiddle.git",
+  "repository": "git://github.com/jwilkins/middlefiddle.git",
   "author": "Mark Percival <mark@markpercival.us> (http://markpercival.us)",
-  "repository": "git://github.com/mdp/middlefiddle",
+  "repository": "git://github.com/jwilkins/middlefiddle",
   "dependencies": {
     "connect": "~>1.8.7",
     "coffee-script": ">=1.3.0",
