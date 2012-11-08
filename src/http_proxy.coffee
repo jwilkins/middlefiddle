@@ -122,6 +122,7 @@ exports.HttpProxy = class HttpProxy extends connect.HTTPServer
 
     upstream_request.on 'error', (err)->
       log.error("Upstream Fail - #{req.method} - #{req.href}")
+      dlogRequest(req, 'outboundProxy')
       log.error(err)
     upstream_request.end()
 
@@ -167,3 +168,21 @@ bodyLogger = (stream, type, callback) ->
       stream.on 'end', ->
         callback()
       break
+
+dlogRequest = (req, caller) ->
+  if isSecure(req)
+    log.info("http_proxy.#{caller}:\n  proto: https")
+  else
+    log.info("http_proxy.#{caller}:\n  proto: http")
+  log.info("  req.method: #{req.method}")
+  log.info("  req.host: #{req.headers['host']}")
+  log.info("  req.url: #{req.url}")
+  if req.headers['host']
+    log.info("  req.host: #{req.headers['host'].split(':')[0]}")
+    log.info("  req.port: #{req.headers['host'].split(':')[1]}")
+
+  log.info("  req.path: #{req.path}")
+  log.info("  req.href: #{req.href}")
+  log.error("-----------")
+
+
